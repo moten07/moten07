@@ -1,18 +1,21 @@
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
-    alias(libs.plugins.android.kotlin.multiplatform.library)
+    alias(libs.plugins.android.library)
 }
 
 kotlin {
-
-    androidLibrary {
+    android {
         namespace = "io.github.moten07.shared"
-        compileSdk = libs.versions.android.targetSdk.get().toInt()
+        compileSdk = libs.versions.android.compileSdk.get().toInt()
+        minSdk = libs.versions.android.minSdk.get().toInt()
+        compilerOptions {
+            jvmTarget.set(JvmTarget.JVM_21)
+        }
     }
 
-    iosX64()
     iosArm64()
     iosSimulatorArm64()
 
@@ -27,7 +30,6 @@ kotlin {
         browser()
     }
 
-
     sourceSets {
         commonMain.dependencies {
             // put your Multiplatform dependencies here
@@ -38,14 +40,4 @@ kotlin {
     }
 }
 
-//android {
-//    namespace = "io.github.moten07.shared"
-//    compileSdk = libs.versions.android.targetSdk.get().toInt()
-//    compileOptions {
-//        sourceCompatibility = JavaVersion.VERSION_11
-//        targetCompatibility = JavaVersion.VERSION_11
-//    }
-//    defaultConfig {
-//        minSdk = libs.versions.android.minSdk.get().toInt()
-//    }
-//}
+

@@ -1,12 +1,12 @@
 This is a Kotlin Multiplatform project targeting Android, iOS, Web, Desktop (JVM), Server.
 
-* [/composeApp](./app/src) is for code that will be shared across your Compose Multiplatform applications.
+* [/composeApp](./composeApp/src) is for code that will be shared across your Compose Multiplatform applications.
   It contains several subfolders:
-    - [commonMain](./app/src/commonMain/kotlin) is for code that’s common for all targets.
+    - [commonMain](./composeApp/src/commonMain/kotlin) is for code that’s common for all targets.
     - Other folders are for Kotlin code that will be compiled for only the platform indicated in the folder name.
       For example, if you want to use Apple’s CoreCrypto for the iOS part of your Kotlin app,
-      the [iosMain](./app/src/iosMain/kotlin) folder would be the right place for such calls.
-      Similarly, if you want to edit the Desktop (JVM) specific part, the [jvmMain](./app/src/jvmMain/kotlin)
+      the [iosMain](./composeApp/src/iosMain/kotlin) folder would be the right place for such calls.
+      Similarly, if you want to edit the Desktop (JVM) specific part, the [jvmMain](./composeApp/src/jvmMain/kotlin)
       folder is the appropriate location.
 
 * [/iosApp](./iosApp/iosApp) contains iOS applications. Even if you’re sharing your UI with Compose Multiplatform,
@@ -41,23 +41,23 @@ Tencent Mirror Image:`https\://services.gradle.org/distributions/gradle-xxx.zip`
     - Android
         + To build and run the development version of the Android app, use the run configuration from the run widget
           in your IDE’s toolbar or build it directly from the terminal:
-          + Generate apk: `gradle -q :app:assembleRelease`
-          + Generate aab: `gradle -q :app:bundleRelease`
+          + Generate apk: `gradle :composeApp:assembleRelease`
+          + Generate aab: `gradle :composeApp:bundleRelease`
     - ios
       + To build and run the development version of the iOS app, use the run configuration from the run widget
         in your IDE’s toolbar or open the [/iosApp](./iosApp) directory in Xcode and run it from there.
     - Desktop
-        + run: `gradle -q :app:run`
-        + Generate AppImage: `gradle app:packageReleaseAppImage`
-        + Generate exe: `gradle app:packageReleaseExe`
-        + Generate dmg: `gradle app:packageReleaseDmg`
+        + run: `gradle :composeApp:run`
+        + Generate AppImage: `gradle :composeApp:packageReleaseAppImage`
+        + Generate exe: `gradle :composeApp:packageReleaseExe`
+        + Generate dmg: `gradle :composeApp:packageReleaseDmg`
     - Server
-        + run: `gradle -q :server:run`
-        + Generate jar: `gradle -q :server:shadowJar`
+        + run: `gradle :server:run`
+        + Generate jar: `gradle :server:shadowJar`
     - web
         + run:
-          - for the Wasm target (faster, modern browsers):`gradle :app:wasmJsBrowserDevelopmentRun`
-          - for the JS target (slower, supports older browsers):`gradle :app:jsBrowserDevelopmentRun`
-        + Generate artifacts: `gradle :app:wasmJsBrowserDistribution`
-            * The generated artifacts are in the directory: `app/build/dist/wasmJs/productionExecutable`
+          - for the Wasm target (faster, modern browsers):`gradle :composeApp:wasmJsBrowserDevelopmentRun`
+          - for the JS target (slower, supports older browsers):`gradle :composeApp:jsBrowserDevelopmentRun`
+        + Generate artifacts: `gradle :composeApp:wasmJsBrowserDistribution`
+            * The generated artifacts are in the directory: `composeApp/build/dist/wasmJs/productionExecutable`
             * can push it to GitHub pages

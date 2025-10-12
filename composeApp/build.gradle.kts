@@ -10,18 +10,14 @@ plugins {
     alias(libs.plugins.compose.hotReload)
 }
 
-
-group = "io.github.moten07"
-
 kotlin {
     androidTarget {
         compilerOptions {
-            jvmTarget.set(JvmTarget.JVM_11)
+            jvmTarget.set(JvmTarget.JVM_21)
         }
     }
-    
+
     listOf(
-        iosX64(),
         iosArm64(),
         iosSimulatorArm64()
     ).forEach { iosTarget ->
@@ -30,7 +26,7 @@ kotlin {
             isStatic = true
         }
     }
-    
+
     jvm()
 
     js {
@@ -43,7 +39,7 @@ kotlin {
         browser()
         binaries.executable()
     }
-    
+
     sourceSets {
         androidMain.dependencies {
             implementation(compose.preview)
@@ -56,7 +52,7 @@ kotlin {
             implementation(compose.ui)
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
-            implementation(libs.androidx.lifecycle.viewmodel)
+            implementation(libs.androidx.lifecycle.viewmodelCompose)
             implementation(libs.androidx.lifecycle.runtimeCompose)
             implementation(projects.shared)
         }
@@ -70,10 +66,9 @@ kotlin {
     }
 }
 
-
 android {
     namespace = "io.github.moten07"
-    compileSdk = libs.versions.android.targetSdk.get().toInt()
+    compileSdk = libs.versions.android.compileSdk.get().toInt()
 
     defaultConfig {
         applicationId = "io.github.moten07"
@@ -81,7 +76,6 @@ android {
         targetSdk = libs.versions.android.targetSdk.get().toInt()
         versionCode = 1
         versionName = "1.0"
-        versionNameSuffix = "-艺术就是派大星"
     }
     packaging {
         resources {
@@ -94,8 +88,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
     }
 }
 
@@ -103,16 +97,12 @@ dependencies {
     debugImplementation(compose.uiTooling)
 }
 
-
 compose.desktop {
     application {
         mainClass = "io.github.moten07.MainKt"
+
         nativeDistributions {
-            targetFormats(
-                TargetFormat.Dmg,
-                TargetFormat.Exe,
-                TargetFormat.AppImage
-                )
+            targetFormats(TargetFormat.Dmg, TargetFormat.Exe, TargetFormat.AppImage)
             packageName = "io.github.moten07"
             packageVersion = "1.0.0"
         }

@@ -4,11 +4,11 @@ plugins {
     application
 }
 
-group = "io.github.moten07"
+group = "io.github.moten07.moten07"
 version = "1.0.0"
 application {
-    mainClass.set("io.github.moten07.ApplicationKt")
-    
+    mainClass.set("io.github.moten07.moten07.ApplicationKt")
+
     val isDevelopment: Boolean = project.ext.has("development")
     applicationDefaultJvmArgs = listOf("-Dio.ktor.development=$isDevelopment")
 }
