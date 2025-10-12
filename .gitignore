@@ -5,6 +5,7 @@
 xcuserdata
 !src/**/build/
 
+
 captures
 .externalNativeBuild
 .cxx
@@ -217,3 +218,7 @@ render.experimental.xml
 # Android Profiling
 *.hprof
 /kotlin-js-store/
+
+.DS_Store
+**/xcshareddata/WorkspaceSettings.xcsettings
+node_modules/
