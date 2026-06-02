@@ -103,6 +103,79 @@ Handler的工作原理是基于消息队列和消息循环机制。当一个Hand
 - 在触控事件的坐标系统中，开发者需要注意坐标的转换问题，如在处理触控事件时，可能需要将坐标值从一个View的坐标系转换到另一个View的坐标系，或者将坐标值从屏幕坐标系转换到View的坐标系，这些都需要使用一些方法来进行坐标转换，如getLocationOnScreen()
 、getLocationInWindow()等方法。
 
+### Activity
+
+#### 1. Activity的启动模式
+
+```xml
+<!-- Specify how an activity should be launched.  See the
+     <a href="{@docRoot}guide/topics/fundamentals/tasks-and-back-stack.html">Tasks and Back
+     Stack</a> document for important information on how these options impact
+     the behavior of your application.
+
+     <p>If this attribute is not specified, <code>standard</code> launch
+     mode will be used.  Note that the particular launch behavior can
+     be changed in some ways at runtime through the
+     {@link android.content.Intent} flags
+     {@link android.content.Intent#FLAG_ACTIVITY_SINGLE_TOP},
+     {@link android.content.Intent#FLAG_ACTIVITY_NEW_TASK}, and
+     {@link android.content.Intent#FLAG_ACTIVITY_MULTIPLE_TASK}. -->
+<attr name="launchMode">
+  <!-- 默认模式，通常会创建一个新的实例
+       活动开始时会有所不同，尽管这种行为可能会有所变化
+       随着其他选项的引入，如
+       {@link android.content.Intent#FLAG_ACTIVITY_NEW_TASK
+       Intent.FLAG_ACTIVITY_NEW_TASK}。-->
+  <enum name="standard" value="0"/>
+  <!-- 如果，在开始活动时，已经有
+      前景中同一活动类的实例，即
+      与用户交互，然后
+      重复使用那个实例。 该现有实例将收到一个调用
+      {@link android.app.Activity#onNewIntent Activity.onNewIntent（）}
+      正在启动的新意图。-->
+  <enum name="singleTop" value="1"/>
+  <!-- 如果在开始活动时，已经有任务在运行
+      这从这个活动开始，然后不再重新开始
+      例如当前任务被推到最前端。 现存的
+      实例将收到 {@link android.app.Activity#onNewIntent 的调用
+      Activity.onNewIntent（）}
+      新意图正在启动，以及
+      {@link android.content.Intent#FLAG_ACTIVITY_BROUGHT_TO_FRONT
+      Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT} 旗帜设置。 这是一个超集
+      单顶模式的，如果已经存在实例
+      如果活动从栈顶端开始，它会
+      如同此处所述接收意图（不含
+      FLAG_ACTIVITY_BROUGHT_TO_FRONT旗帜组）。 参见
+      <a href=“{@docRoot}guide/topics/fundamentals/tasks-and-back-stack.html”>Tasks and Back
+      堆叠</a>文档以获取更多任务细节。-->
+  <enum name="singleTask" value="2"/>
+  <!-- 只允许这种行为发生一次
+      奔跑。 该活动获得一个独特的任务，只有它自己运行
+      在其中;如果以后以同样的意图再次发射，那么
+      任务将被提出，其
+      {@link android.app.Activity#onNewIntent Activity.onNewIntent（）}
+      方法叫做。 如果是这样
+      活动尝试启动一个新活动，这个新活动将是
+      在另一个任务中启动。 参见
+      <a href=“{@docRoot}guide/topics/fundamentals/tasks-and-back-stack.html”>Tasks and Back
+      堆叠</a>文档以获取更多任务细节。-->
+  <enum name="singleInstance" value="3"/>
+  <!-- 该活动只能作为任务的根活动运行，即第一个活动
+      创造了任务，因此这一活动只有一次实例
+      在一项任务中。与{@code singleTask}启动模式不同，该活动可以是
+      在不同任务中多次开始，如果
+      {@code FLAG_ACTIVITY_MULTIPLE_TASK} 或 {@code FLAG_ACTIVITY_NEW_DOCUMENT} 已设置。
+      该枚举值在 API 级别 31 中引入。-->
+  <enum name="singleInstancePerTask" value="4"/>
+</attr>
+```
+
+* standard：每次新建实例（不复用）。
+* singleTop：只有栈顶才复用（栈顶复用）。
+* singleTask：全局单实例 —— 若存在则带任务前台并复用（跨任务带前台）。
+* singleInstance：完全独立任务的单实例（极端隔离）。
+* singleInstancePerTask：每个任务一个实例，允许多个任务各自有一份（文档/多任务模式下使用）。
+
 ### Activity生命周期
 
 #### 1. Activity的生命周期方法
