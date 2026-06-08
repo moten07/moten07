@@ -67,9 +67,12 @@ Handler的工作原理是基于消息队列和消息循环机制。当一个Hand
 
 #### 7. Handler与其他线程通信机制的比较
 
-- Handler与AsyncTask：Handler适用于需要在不同线程之间进行通信和任务调度的场景，而AsyncTask适用于需要在后台线程中执行耗时操作并且在主线程中更新UI的场景。Handler提供了更灵活和通用的方式来处理消息和Runnable对象，而AsyncTask则提供了更简单和方便的方式来处理异步任务。
-- Handler与Thread：Handler适用于需要在不同线程之间进行通信和任务调度的场景，而Thread适用于需要创建和管理线程的场景。Handler提供了更高层次的抽象来处理消息和Runnable对象，而Thread则提供了更底层的控制来管理线程的生命周期和执行。
-- Handler与Executor：Handler适用于需要在不同线程之间进行通信和任务调度的场景，而Executor适用于需要管理和执行异步任务的场景。Handler提供了更灵活和通用的方式来处理消息和Runnable对象，而Executor则提供了更高效和可扩展的方式来管理和执行异步任务。
+-
+Handler与AsyncTask：Handler适用于需要在不同线程之间进行通信和任务调度的场景，而AsyncTask适用于需要在后台线程中执行耗时操作并且在主线程中更新UI的场景。Handler提供了更灵活和通用的方式来处理消息和Runnable对象，而AsyncTask则提供了更简单和方便的方式来处理异步任务。
+-
+Handler与Thread：Handler适用于需要在不同线程之间进行通信和任务调度的场景，而Thread适用于需要创建和管理线程的场景。Handler提供了更高层次的抽象来处理消息和Runnable对象，而Thread则提供了更底层的控制来管理线程的生命周期和执行。
+-
+Handler与Executor：Handler适用于需要在不同线程之间进行通信和任务调度的场景，而Executor适用于需要管理和执行异步任务的场景。Handler提供了更灵活和通用的方式来处理消息和Runnable对象，而Executor则提供了更高效和可扩展的方式来管理和执行异步任务。
 - 总之，Handler与其他线程通信机制各有优缺点，开发者需要根据具体的需求和场景来选择合适的机制，以确保应用程序的稳定性和性能.
 
 ### 触控事件
@@ -79,9 +82,12 @@ Handler的工作原理是基于消息队列和消息循环机制。当一个Hand
 - 触控事件的分发机制是指当用户在屏幕上进行触控操作时，系统如何将触控事件分发给相应的View来处理。
 - 当用户进行触控操作时，系统会首先将触控事件分发给当前触控事件所在的View，如果该View没有处理该事件，系统会继续将事件分发给该View的父View，直到事件被处理或者到达根View为止。
 - 在触控事件的分发过程中，系统会调用View的dispatchTouchEvent方法来分发事件，开发者可以重写该方法来控制事件的分发过程。
-- 在dispatchTouchEvent方法中，开发者可以根据需要决定是否将事件传递给子View来处理，或者直接处理该事件。需要注意的是，如果开发者在dispatchTouchEvent方法中返回true，表示该事件已经被处理，不会继续分发给其他View；如果返回false，表示该事件没有被处理，系统会继续将事件分发给其他View。
-- 在触控事件的分发过程中，系统还会调用View的onInterceptTouchEvent方法来决定是否拦截事件，如果该方法返回true，表示该View会拦截事件，不会将事件分发给子View；如果返回false，表示该View不会拦截事件，系统会继续将事件分发给子View。
-- 在触控事件的分发过程中，系统还会调用View的onTouchEvent方法来处理事件，如果该方法返回true，表示该事件已经被处理，不会继续分发给其他View；如果返回false，表示该事件没有被处理，系统会继续将事件分发给其他View.
+-
+在dispatchTouchEvent方法中，开发者可以根据需要决定是否将事件传递给子View来处理，或者直接处理该事件。需要注意的是，如果开发者在dispatchTouchEvent方法中返回true，表示该事件已经被处理，不会继续分发给其他View；如果返回false，表示该事件没有被处理，系统会继续将事件分发给其他View。
+-
+在触控事件的分发过程中，系统还会调用View的onInterceptTouchEvent方法来决定是否拦截事件，如果该方法返回true，表示该View会拦截事件，不会将事件分发给子View；如果返回false，表示该View不会拦截事件，系统会继续将事件分发给子View。
+-
+在触控事件的分发过程中，系统还会调用View的onTouchEvent方法来处理事件，如果该方法返回true，表示该事件已经被处理，不会继续分发给其他View；如果返回false，表示该事件没有被处理，系统会继续将事件分发给其他View.
 
 #### 2. 触控事件的处理流程
 
@@ -100,7 +106,8 @@ Handler的工作原理是基于消息队列和消息循环机制。当一个Hand
 - 触控事件的坐标系统是指系统如何表示触控事件的位置和坐标。系统使用一个二维坐标系来表示触控事件的位置，坐标的原点通常位于屏幕的左上角，x轴向右增加，y轴向下增加。
 - 在触控事件的坐标系统中，系统会提供一些方法来获取触控事件的坐标信息，如getX()、getY()
   等，这些方法返回的坐标值是相对于当前View的坐标系而言的，如果需要获取相对于屏幕的坐标值，可以使用getRawX()、getRawY()等方法。
-- 在触控事件的坐标系统中，开发者需要注意坐标的转换问题，如在处理触控事件时，可能需要将坐标值从一个View的坐标系转换到另一个View的坐标系，或者将坐标值从屏幕坐标系转换到View的坐标系，这些都需要使用一些方法来进行坐标转换，如getLocationOnScreen()
+-
+在触控事件的坐标系统中，开发者需要注意坐标的转换问题，如在处理触控事件时，可能需要将坐标值从一个View的坐标系转换到另一个View的坐标系，或者将坐标值从屏幕坐标系转换到View的坐标系，这些都需要使用一些方法来进行坐标转换，如getLocationOnScreen()
 、getLocationInWindow()等方法。
 
 ### Activity
@@ -121,52 +128,52 @@ Handler的工作原理是基于消息队列和消息循环机制。当一个Hand
      {@link android.content.Intent#FLAG_ACTIVITY_NEW_TASK}, and
      {@link android.content.Intent#FLAG_ACTIVITY_MULTIPLE_TASK}. -->
 <attr name="launchMode">
-  <!-- 默认模式，通常会创建一个新的实例
-       活动开始时会有所不同，尽管这种行为可能会有所变化
-       随着其他选项的引入，如
-       {@link android.content.Intent#FLAG_ACTIVITY_NEW_TASK
-       Intent.FLAG_ACTIVITY_NEW_TASK}。-->
-  <enum name="standard" value="0"/>
-  <!-- 如果，在开始活动时，已经有
-      前景中同一活动类的实例，即
-      与用户交互，然后
-      重复使用那个实例。 该现有实例将收到一个调用
-      {@link android.app.Activity#onNewIntent Activity.onNewIntent（）}
-      正在启动的新意图。-->
-  <enum name="singleTop" value="1"/>
-  <!-- 如果在开始活动时，已经有任务在运行
-      这从这个活动开始，然后不再重新开始
-      例如当前任务被推到最前端。 现存的
-      实例将收到 {@link android.app.Activity#onNewIntent 的调用
-      Activity.onNewIntent（）}
-      新意图正在启动，以及
-      {@link android.content.Intent#FLAG_ACTIVITY_BROUGHT_TO_FRONT
-      Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT} 旗帜设置。 这是一个超集
-      单顶模式的，如果已经存在实例
-      如果活动从栈顶端开始，它会
-      如同此处所述接收意图（不含
-      FLAG_ACTIVITY_BROUGHT_TO_FRONT旗帜组）。 参见
-      <a href=“{@docRoot}guide/topics/fundamentals/tasks-and-back-stack.html”>Tasks and Back
-      堆叠</a>文档以获取更多任务细节。-->
-  <enum name="singleTask" value="2"/>
-  <!-- 只允许这种行为发生一次
-      奔跑。 该活动获得一个独特的任务，只有它自己运行
-      在其中;如果以后以同样的意图再次发射，那么
-      任务将被提出，其
-      {@link android.app.Activity#onNewIntent Activity.onNewIntent（）}
-      方法叫做。 如果是这样
-      活动尝试启动一个新活动，这个新活动将是
-      在另一个任务中启动。 参见
-      <a href=“{@docRoot}guide/topics/fundamentals/tasks-and-back-stack.html”>Tasks and Back
-      堆叠</a>文档以获取更多任务细节。-->
-  <enum name="singleInstance" value="3"/>
-  <!-- 该活动只能作为任务的根活动运行，即第一个活动
-      创造了任务，因此这一活动只有一次实例
-      在一项任务中。与{@code singleTask}启动模式不同，该活动可以是
-      在不同任务中多次开始，如果
-      {@code FLAG_ACTIVITY_MULTIPLE_TASK} 或 {@code FLAG_ACTIVITY_NEW_DOCUMENT} 已设置。
-      该枚举值在 API 级别 31 中引入。-->
-  <enum name="singleInstancePerTask" value="4"/>
+    <!-- 默认模式，通常会创建一个新的实例
+         活动开始时会有所不同，尽管这种行为可能会有所变化
+         随着其他选项的引入，如
+         {@link android.content.Intent#FLAG_ACTIVITY_NEW_TASK
+         Intent.FLAG_ACTIVITY_NEW_TASK}。-->
+    <enum name="standard" value="0"/>
+    <!-- 如果，在开始活动时，已经有
+        前景中同一活动类的实例，即
+        与用户交互，然后
+        重复使用那个实例。 该现有实例将收到一个调用
+        {@link android.app.Activity#onNewIntent Activity.onNewIntent（）}
+        正在启动的新意图。-->
+    <enum name="singleTop" value="1"/>
+    <!-- 如果在开始活动时，已经有任务在运行
+        这从这个活动开始，然后不再重新开始
+        例如当前任务被推到最前端。 现存的
+        实例将收到 {@link android.app.Activity#onNewIntent 的调用
+        Activity.onNewIntent（）}
+        新意图正在启动，以及
+        {@link android.content.Intent#FLAG_ACTIVITY_BROUGHT_TO_FRONT
+        Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT} 旗帜设置。 这是一个超集
+        单顶模式的，如果已经存在实例
+        如果活动从栈顶端开始，它会
+        如同此处所述接收意图（不含
+        FLAG_ACTIVITY_BROUGHT_TO_FRONT旗帜组）。 参见
+        <a href=“{@docRoot}guide/topics/fundamentals/tasks-and-back-stack.html”>Tasks and Back
+        堆叠</a>文档以获取更多任务细节。-->
+    <enum name="singleTask" value="2"/>
+    <!-- 只允许这种行为发生一次
+        奔跑。 该活动获得一个独特的任务，只有它自己运行
+        在其中;如果以后以同样的意图再次发射，那么
+        任务将被提出，其
+        {@link android.app.Activity#onNewIntent Activity.onNewIntent（）}
+        方法叫做。 如果是这样
+        活动尝试启动一个新活动，这个新活动将是
+        在另一个任务中启动。 参见
+        <a href=“{@docRoot}guide/topics/fundamentals/tasks-and-back-stack.html”>Tasks and Back
+        堆叠</a>文档以获取更多任务细节。-->
+    <enum name="singleInstance" value="3"/>
+    <!-- 该活动只能作为任务的根活动运行，即第一个活动
+        创造了任务，因此这一活动只有一次实例
+        在一项任务中。与{@code singleTask}启动模式不同，该活动可以是
+        在不同任务中多次开始，如果
+        {@code FLAG_ACTIVITY_MULTIPLE_TASK} 或 {@code FLAG_ACTIVITY_NEW_DOCUMENT} 已设置。
+        该枚举值在 API 级别 31 中引入。-->
+    <enum name="singleInstancePerTask" value="4"/>
 </attr>
 ```
 
@@ -259,6 +266,7 @@ Handler的工作原理是基于消息队列和消息循环机制。当一个Hand
 - 当Activity处于Stopped状态时，Fragment的onStop()方法会被调用；
 - 当Activity处于Destroyed状态时，Fragment的onDestroy()方法会被调用。
 -
+
 需要注意的是，Fragment的生命周期方法会在Activity的相应生命周期方法中被调用，但Fragment的生命周期状态可能与Activity的生命周期状态不同，例如，当Activity处于Paused状态时，Fragment可能仍然处于Resumed状态，因此开发者需要根据具体的需求来处理Fragment和Activity之间的生命周期关系，以确保应用程序的稳定性和性能.
 
 #### 4. Fragment的生命周期和用户交互的关系
@@ -470,3 +478,94 @@ OOM（Out of Memory）是指应用程序在运行过程中，尝试分配内存�
 - 进行代码审查：进行代码审查，及时发现和修复可能导致内存泄露的问题，确保代码的质量和性能。
 - 定期进行内存分析：定期使用工具进行内存分析，监控应用程序的内存使用情况，及时发现和修复内存泄露问题，确保应用程序的性能和稳定性。
 - 提高开发者的内存管理意识：通过培训和教育，提高开发者的内存管理意识，让他们了解内存泄露的原因、类型和预防措施，从而在开发过程中更加注意内存管理，减少内存泄露的风险。
+
+### native异常
+
+#### 1. 什么是native异常？
+
+native异常是指在Android应用程序中，由于调用了本地代码（如C/C++代码）而引发的异常。这些异常通常是由于本地代码中的错误或不当的内存管理引起的，可能会导致应用程序崩溃或出现其他不可预期的行为。
+
+#### 2. native异常的原因
+
+- 内存访问错误：当本地代码尝试访问无效的内存地址时，就会引发内存访问错误，导致native异常。这可能是由于指针错误、数组越界等原因引起的。
+- 资源泄漏：当本地代码没有正确释放资源时，就会引发资源泄漏，导致native异常。这可能是由于忘记释放内存、文件句柄等资源引起的。
+- 线程安全问题：当本地代码在多线程环境中没有正确处理线程安全问题时，就会引发线程安全问题，导致native异常。这可能是由于竞争条件、死锁等原因引起的。
+- 其他原因：还有一些其他原因可能导致native异常，如不合理的代码设计、过度使用第三方库等，这些都可能导致应用程序崩溃。
+
+#### 3. native异常怎么排查
+
+- 查看日志：当发生native异常时，系统会在日志中记录相关的错误信息。开发者可以通过查看日志来获取异常的详细信息，包括异常类型、堆栈跟踪等，以帮助定位问题的根源。
+- 使用调试工具：可以使用Android Studio的调试工具来调试应用程序，设置断点并逐步执行代码，以观察变量的值和程序的执行流程，从而找到引发native异常的代码段。
+- 使用内存分析工具：当native异常可能与内存访问错误或资源泄漏有关时，可以使用内存分析工具来监控应用程序的内存使用情况，及时发现和修复内存泄漏问题，避免因内存不足而引发native异常。
+- 进行代码审查：进行代码审查，及时发现和修复可能导致native异常的问题，确保代码的质量和性能。
+- 使用静态分析工具：使用静态分析工具来扫描代码，检测潜在的错误和不当的内存管理，以帮助预防native异常的发生。
+- 进行测试和验证：在修复native异常问题后，开发者需要进行充分的测试和验证，确保native异常问题已经得到解决，并且应用程序的性能和稳定性得到了提升。同时，开发者还需要监控应用程序的内存使用情况，确保没有新的native异常问题出现.
+
+#### 4. ndk-stack的作用
+
+ndk-stack是Android NDK提供的一个工具，用于解析native异常的堆栈信息。当应用程序发生native异常时，系统会生成一个包含堆栈信息的日志，开发者可以使用ndk-stack工具来解析这个日志，获取异常发生的具体位置和调用关系，从而帮助定位问题的根源。ndk-stack工具可以将堆栈信息中的地址转换为对应的函数名和行号，使得开发者能够更容易地理解和分析异常的原因。使用ndk-stack工具可以大大提高排查native异常的效率，帮助开发者快速定位和修复问题，提升应用程序的性能和稳定性。
+
+#### 5. addr2line
+
+addr2line是一个命令行工具，用于将内存地址转换为对应的函数名和行号。当应用程序发生native异常时，系统会生成一个包含堆栈信息的日志，其中包含了内存地址。开发者可以使用addr2line工具来解析这些内存地址，获取异常发生的具体位置和调用关系，从而帮助定位问题的根源。addr2line工具需要配合符号文件（如.so文件）使用，以便正确地解析内存地址。使用addr2line工具可以大大提高排查native异常的效率，帮助开发者快速定位和修复问题，提升应用程序的性能和稳定性。
+
+### 蓝牙
+
+#### 经典蓝牙和低功耗蓝牙的区别
+
+- 经典蓝牙（Classic Bluetooth）是一种传统的蓝牙技术，适用于需要高数据传输速率和较长距离的应用，如音频传输、文件传输等。经典蓝牙使用频率为2.4GHz的无线电波进行通信，支持点对点和点对多点的连接方式。
+- 低功耗蓝牙（Bluetooth Low
+  Energy，BLE）是一种新型的蓝牙技术，适用于需要低功耗和短距离通信的应用，如智能手环、智能家居等。低功耗蓝牙使用频率为2.4GHz的无线电波进行通信，但采用了不同的协议和数据传输方式，以实现更低的功耗和更长的电池寿命。低功耗蓝牙支持点对点、点对多点和广播的连接方式，可以在不建立连接的情况下进行数据传输。
+
+#### 蓝牙连接的步骤
+
+- 检查设备是否支持蓝牙：首先需要检查设备是否支持蓝牙功能，并且是否已经开启蓝牙。
+- 获取BluetoothAdapter：通过BluetoothAdapter类获取设备的蓝牙适配器实例，用于进行蓝牙相关的操作。
+- 扫描设备：使用BluetoothAdapter的startDiscovery方法开始扫描周围的蓝牙设备，并通过BroadcastReceiver监听扫描结果。
+- 连接设备：当扫描到目标设备后，可以使用BluetoothDevice类的createRfcommSocketToServiceRecord方法创建一个BluetoothSocket实例，并调用connect方法连接设备。
+- 进行数据传输：连接成功后，可以通过BluetoothSocket的getInputStream和getOutputStream方法获取输入流和输出流，进行数据的读写操作。
+- 断开连接：当不再需要连接时，可以调用BluetoothSocket的close方法断开连接，释放资源。
+- 其他操作：在连接过程中，还可以进行一些其他的操作，如获取设备的UUID、设置连接参数等，以满足不同的应用需求。
+
+#### BLE连接的步骤
+
+- 检查设备是否支持BLE：首先需要检查设备是否支持BLE功能，并且是否已经开启蓝牙。
+- 获取BluetoothAdapter：通过BluetoothAdapter类获取设备的蓝牙适配器实例，用于进行蓝牙相关的操作。
+- 扫描设备：使用BluetoothLeScanner类的startScan方法开始扫描周围的BLE设备，并通过ScanCallback监听扫描结果。
+- 连接设备：当扫描到目标设备后，可以使用BluetoothDevice类的connectGatt方法创建一个BluetoothGatt实例，并调用connect方法连接设备。
+- 发现服务：连接成功后，可以调用BluetoothGatt的discoverServices方法发现设备提供的服务，并通过BluetoothGattCallback监听服务发现结果。
+- 进行数据传输：当发现服务后，可以通过BluetoothGatt的readCharacteristic和writeCharacteristic方法进行数据的读写操作。
+- 断开连接：当不再需要连接时，可以调用BluetoothGatt的close方法断开连接，释放资源。
+- 其他操作：在连接过程中，还可以进行一些其他的操作，如获取设备的UUID、设置连接参数等，以满足不同的应用需求。
+
+#### BLE和经典蓝牙的连接区别
+
+- 连接方式：经典蓝牙使用BluetoothSocket进行连接，而BLE使用BluetoothGatt进行连接。
+- 数据传输方式：经典蓝牙使用输入流和输出流进行数据传输，而BLE使用特征（Characteristic）进行数据传输。
+- 功耗：BLE设计用于低功耗应用，采用了不同的协议和数据传输方式，以实现更低的功耗和更长的电池寿命，而经典蓝牙则适用于需要高数据传输速率和较长距离的应用。
+- 连接范围：经典蓝牙的连接范围较远，通常在10米以上，而BLE的连接范围较近，通常在50米以内。
+- 连接速度：经典蓝牙的连接速度较快，适用于需要高数据传输速率的应用，而BLE的连接速度较慢，适用于需要低功耗和短距离通信的应用。
+- 连接稳定性：经典蓝牙的连接稳定性较高，适用于需要持续连接的应用，而BLE的连接稳定性较低，适用于需要偶尔连接的应用。
+
+#### 蓝牙数据传输速度
+
+- 经典蓝牙的最大数据传输速率为3Mbps，适用于需要高数据传输速率的应用，如音频传输、文件传输等。
+- 低功耗蓝牙的最大数据传输速率为1Mbps，适用于需要低功耗和短距离通信的应用，如智能手环、智能家居等。需要注意的是，实际的蓝牙数据传输速率可能会受到环境干扰、设备性能等因素的影响，可能会低于理论最大速率。
+- 蓝牙数据传输速率还可以通过使用不同的蓝牙版本来提高，如蓝牙4.0、蓝牙5.0等，较新的蓝牙版本通常支持更高的数据传输速率和更长的连接范围。
+- 此外，蓝牙数据传输速率还可以通过使用不同的传输模式来提高，如经典蓝牙的EDR（Enhanced Data Rate）模式可以提供更高的数据传输速率，而BLE的2M
+  PHY（2Mbps Physical Layer）模式也可以提供更高的数据传输速率。
+
+### native开发
+
+#### 1. 开发流程
+- 环境搭建：首先需要搭建Android NDK开发环境，包括安装Android Studio、配置NDK路径等。
+- 创建项目：在Android Studio中创建一个新的Android项目，并选择包含C++支持的选项。
+- 编写C/C++代码：在项目中创建一个C/C++源文件，并编写需要实现的功能的C/C++代码。
+- 配置CMake：在项目的CMakeLists.txt文件中配置CMake，以便正确地编译和链接C/C++代码。
+- 调用native方法：在Java/Kotlin代码中使用JNI调用native方法，将需要传递的数据传递给C/C++代码，并获取返回结果。
+- 编译和运行：编译项目并运行应用程序，测试native方法的功能是否正常。
+- 调试和优化：使用NDK提供的调试工具进行调试，分析性能瓶颈，并进行相应的优化，以提升应用程序的性能和稳定性。
+
+#### 2. JNI的作用
+
+JNI（Java Native Interface）是Java提供的一种机制，允许Java代码与其他编程语言（如C/C++）编写的代码进行交互。JNI的作用是提供一种桥梁，使得Java代码能够调用native方法，并且能够在native代码中访问Java对象和方法。通过JNI，开发者可以在Java代码中声明native方法，并且在C/C++代码中实现这些方法的功能。JNI还提供了一些函数和数据类型，用于在Java和native代码之间进行数据传递和类型转换。使用JNI可以让开发者能够利用C/C++的性能优势来实现一些性能敏感的功能，同时也可以让开发者能够访问一些Java代码无法直接访问的底层功能，如操作系统级别的API、硬件设备等。
