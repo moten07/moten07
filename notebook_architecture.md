@@ -20,3 +20,11 @@ MVVM（Model-View-ViewModel）是一种软件架构模式，主要用于分离�
 - Android的ViewModel类是Android
   Jetpack库中的一个组件，专门用于在Android应用中管理UI相关的数据。它可以在配置更改（如屏幕旋转）时保持数据的持久性，并且可以与LiveData等组件结合使用，以实现数据的观察和更新。
 - 虽然Android的ViewModel类可以用于实现MVVM架构，但它并不是MVVM架构的唯一实现方式。开发者可以根据自己的需求选择适合的架构模式和组件来构建应用程序。
+
+### MVI架构
+
+MVI（Model-View-Intent）是一种软件架构模式，主要用于分离用户界面和业务逻辑。它由三个主要组件组成：
+
+- Model（模型）：负责处理数据和业务逻辑。
+- View（视图）：负责显示数据和接收用户输入。
+- Intent（意图）：负责处理用户的操作和事件，并将其转换为对模型的更新。
